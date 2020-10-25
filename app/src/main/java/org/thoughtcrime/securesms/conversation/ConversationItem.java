@@ -853,6 +853,10 @@ public class ConversationItem extends LinearLayout implements BindableConversati
 
       footer.setVisibility(VISIBLE);
     }
+
+    if (DynamicTheme.isDarkTheme(context)) {
+      bodyBubble.setBackgroundColor(getContext().getResources().getColor(R.color.grey_400_transparent));
+    }
   }
 
   private void setThumbnailCorners(@NonNull MessageRecord           current,
