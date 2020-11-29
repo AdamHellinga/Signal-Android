@@ -155,7 +155,6 @@ public class ManageRecipientFragment extends LoggingFragment {
     secureCallButton            = view.findViewById(R.id.recipient_voice_call);
     insecureCallButton          = view.findViewById(R.id.recipient_insecure_voice_call);
     secureVideoCallButton       = view.findViewById(R.id.recipient_video_call);
-
     return view;
   }
 

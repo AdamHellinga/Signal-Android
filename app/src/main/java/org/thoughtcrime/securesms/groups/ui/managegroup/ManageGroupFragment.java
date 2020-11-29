@@ -4,24 +4,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.takisoft.colorpicker.ColorPickerDialog;
+import com.takisoft.colorpicker.ColorStateDrawable;
 
 import org.thoughtcrime.securesms.AvatarPreviewActivity;
 import org.thoughtcrime.securesms.InviteActivity;
@@ -32,6 +38,7 @@ import org.thoughtcrime.securesms.MuteDialog;
 import org.thoughtcrime.securesms.PushContactSelectionActivity;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.color.MaterialColor;
+import org.thoughtcrime.securesms.color.MaterialColors;
 import org.thoughtcrime.securesms.components.AvatarImageView;
 import org.thoughtcrime.securesms.components.ThreadPhotoRailView;
 import org.thoughtcrime.securesms.contacts.avatars.FallbackContactPhoto;
@@ -88,6 +95,8 @@ public class ManageGroupFragment extends LoggingFragment {
   private TextView                           memberCountUnderAvatar;
   private TextView                           memberCountAboveList;
   private AvatarImageView                    avatar;
+  private View                               colorRow;
+  private ImageView                          colorChip;
   private ThreadPhotoRailView                threadPhotoRailView;
   private View                               groupMediaCard;
   private View                               accessControlCard;
@@ -181,7 +190,8 @@ public class ManageGroupFragment extends LoggingFragment {
     toggleAllMembers            = view.findViewById(R.id.toggle_all_members);
     groupLinkRow                = view.findViewById(R.id.group_link_row);
     groupLinkButton             = view.findViewById(R.id.group_link_button);
-
+    colorRow                    = view.findViewById(R.id.color_row);
+    colorChip                   = view.findViewById(R.id.color_chip);
     return view;
   }
 
@@ -395,6 +405,30 @@ public class ManageGroupFragment extends LoggingFragment {
           break;
       }
     });
+
+
+
+    MaterialColor GroupColor = MaterialColor.GROUP;
+    @ColorInt int        color         = GroupColor.toActionBarColor(requireContext());
+    Drawable[] colorDrawable = new Drawable[]{ContextCompat.getDrawable(requireContext(), R.drawable.colorpickerpreference_pref_swatch)};
+    colorChip.setImageDrawable(new ColorStateDrawable(colorDrawable, color));
+    colorRow.setOnClickListener(v -> handleColorSelection(color));
+  }
+
+  private void handleColorSelection(@ColorInt int currentColor) {
+    @ColorInt int[] colors = MaterialColors.CONVERSATION_PALETTE.asConversationColorArray(requireContext());
+
+    ColorPickerDialog.Params params = new ColorPickerDialog.Params.Builder(requireContext())
+            .setSelectedColor(currentColor)
+            .setColors(colors)
+            .setSize(ColorPickerDialog.SIZE_SMALL)
+            .setSortColors(false)
+            .setColumns(3)
+            .build();
+
+    ColorPickerDialog dialog = new ColorPickerDialog(requireActivity(), color -> viewModel.onSelectColor(color), params);
+    dialog.setTitle(R.string.ManageRecipientActivity_chat_color);
+    dialog.show();
   }
 
   private static int booleanToOnOff(boolean isOn) {

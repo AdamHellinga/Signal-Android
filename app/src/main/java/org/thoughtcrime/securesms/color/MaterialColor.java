@@ -17,20 +17,21 @@ import java.util.Map;
 import static org.thoughtcrime.securesms.util.ThemeUtil.isDarkTheme;
 
 public enum MaterialColor {
-  CRIMSON    (R.color.conversation_crimson,     R.color.conversation_crimson_tint,     R.color.conversation_crimson_shade,     "red"),
-  VERMILLION (R.color.conversation_vermillion,  R.color.conversation_vermillion_tint,  R.color.conversation_vermillion_shade,  "orange"),
-  BURLAP     (R.color.conversation_burlap,      R.color.conversation_burlap_tint,      R.color.conversation_burlap_shade,      "brown"),
-  FOREST     (R.color.conversation_forest,      R.color.conversation_forest_tint,      R.color.conversation_forest_shade,      "green"),
-  WINTERGREEN(R.color.conversation_wintergreen, R.color.conversation_wintergreen_tint, R.color.conversation_wintergreen_shade, "light_green"),
-  TEAL       (R.color.conversation_teal,        R.color.conversation_teal_tint,        R.color.conversation_teal_shade,        "teal"),
-  BLUE       (R.color.conversation_blue,        R.color.conversation_blue_tint,        R.color.conversation_blue_shade,        "blue"),
-  INDIGO     (R.color.conversation_indigo,      R.color.conversation_indigo_tint,      R.color.conversation_indigo_shade,      "indigo"),
-  VIOLET     (R.color.conversation_violet,      R.color.conversation_violet_tint,      R.color.conversation_violet_shade,      "purple"),
-  PLUM       (R.color.conversation_plumb,       R.color.conversation_plumb_tint,       R.color.conversation_plumb_shade,       "pink"),
-  TAUPE      (R.color.conversation_taupe,       R.color.conversation_taupe_tint,       R.color.conversation_taupe_shade,       "blue_grey"),
-  STEEL      (R.color.conversation_steel,       R.color.conversation_steel_tint,       R.color.conversation_steel_shade,       "grey"),
-  ULTRAMARINE(R.color.conversation_ultramarine, R.color.conversation_ultramarine_tint, R.color.conversation_ultramarine_shade, "ultramarine"),
-  GROUP      (R.color.conversation_group,       R.color.conversation_group_tint,       R.color.conversation_group_shade,       "blue");
+
+    CRIMSON    (R.color.conversation_crimson,     R.color.conversation_crimson_tint,     R.color.conversation_crimson_shade,     "red"),
+    VERMILLION (R.color.conversation_vermillion,  R.color.conversation_vermillion_tint,  R.color.conversation_vermillion_shade,  "orange"),
+    BURLAP     (R.color.conversation_burlap,      R.color.conversation_burlap_tint,      R.color.conversation_burlap_shade,      "brown"),
+    FOREST     (R.color.conversation_forest,      R.color.conversation_forest_tint,      R.color.conversation_forest_shade,      "green"),
+    WINTERGREEN(R.color.conversation_wintergreen, R.color.conversation_wintergreen_tint, R.color.conversation_wintergreen_shade, "light_green"),
+    TEAL       (R.color.conversation_teal,        R.color.conversation_teal_tint,        R.color.conversation_teal_shade,        "teal"),
+    BLUE       (R.color.conversation_blue,        R.color.conversation_blue_tint,        R.color.conversation_blue_shade,        "blue"),
+    INDIGO     (R.color.conversation_indigo,      R.color.conversation_indigo_tint,      R.color.conversation_indigo_shade,      "indigo"),
+    VIOLET     (R.color.conversation_violet,      R.color.conversation_violet_tint,      R.color.conversation_violet_shade,      "purple"),
+    PLUM       (R.color.conversation_plumb,       R.color.conversation_plumb_tint,       R.color.conversation_plumb_shade,       "pink"),
+    TAUPE      (R.color.conversation_taupe,       R.color.conversation_taupe_tint,       R.color.conversation_taupe_shade,       "blue_grey"),
+    STEEL      (R.color.conversation_steel,       R.color.conversation_steel_tint,       R.color.conversation_steel_shade,       "grey"),
+    ULTRAMARINE(R.color.conversation_ultramarine, R.color.conversation_ultramarine_tint, R.color.conversation_ultramarine_shade, "ultramarine"),
+    GROUP      (GroupColours.getMainStr(),        GroupColours.getTintStr(),             GroupColours.getShadeStr(),             "blue");
 
   private static final Map<String, MaterialColor> COLOR_MATCHES = new HashMap<String, MaterialColor>() {{
     put("red",         CRIMSON);

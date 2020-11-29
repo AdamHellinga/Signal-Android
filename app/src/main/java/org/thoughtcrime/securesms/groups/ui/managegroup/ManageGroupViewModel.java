@@ -263,6 +263,10 @@ public class ManageGroupViewModel extends ViewModel {
     manageGroupRepository.addMembers(selected, callback.toWorkerCallback());
   }
 
+  void onSelectColor(int color) {
+
+  }
+
   void setMuteUntil(long muteUntil) {
     manageGroupRepository.setMuteUntil(muteUntil);
   }
