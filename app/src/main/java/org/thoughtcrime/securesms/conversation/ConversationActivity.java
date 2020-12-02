@@ -2323,6 +2323,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   }
 
   private void setActionBarColor(MaterialColor color) {
+	// Setting action bar colour
     color.SetColors(GroupColours.getMainStr(), GroupColours.getTintStr(), GroupColours.getShadeStr(), "group_colours");
     ActionBar supportActionBar = getSupportActionBar();
     if (supportActionBar == null) throw new AssertionError();
