@@ -267,7 +267,7 @@ public class ManageGroupViewModel extends ViewModel {
   }
 
   void onSelectColor(int color) {
-    manageGroupRepository.setColor(color);
+    manageGroupRepository.setColor(color); //updates the color after selecting from palate
   }
 
   void setMuteUntil(long muteUntil) {
