@@ -31,7 +31,7 @@ public enum MaterialColor {
     TAUPE      (R.color.conversation_taupe,       R.color.conversation_taupe_tint,       R.color.conversation_taupe_shade,       "blue_grey"),
     STEEL      (R.color.conversation_steel,       R.color.conversation_steel_tint,       R.color.conversation_steel_shade,       "grey"),
     ULTRAMARINE(R.color.conversation_ultramarine, R.color.conversation_ultramarine_tint, R.color.conversation_ultramarine_shade, "ultramarine"),
-    GROUP      (GroupColours.getMainStr(),        GroupColours.getTintStr(),             GroupColours.getShadeStr(),             "blue");
+    GROUP      (GroupColours.getMainStr(),        GroupColours.getTintStr(),             GroupColours.getShadeStr(),             "group");
 
   private static final Map<String, MaterialColor> COLOR_MATCHES = new HashMap<String, MaterialColor>() {{
     put("red",         CRIMSON);
@@ -57,16 +57,22 @@ public enum MaterialColor {
     put("group_color", GROUP);
   }};
 
-  private final @ColorRes int mainColor;
-  private final @ColorRes int tintColor;
-  private final @ColorRes int shadeColor;
-
-  private final String serialized;
+  private @ColorRes int mainColor;
+  private @ColorRes int tintColor;
+  private @ColorRes int shadeColor;
+  private String serialized;
 
 
   MaterialColor(@ColorRes int mainColor, @ColorRes int tintColor, @ColorRes int shadeColor, String serialized) {
     this.mainColor  = mainColor;
     this.tintColor  = tintColor;
+    this.shadeColor = shadeColor;
+    this.serialized = serialized;
+  }
+
+  public void SetColors(int mainColor, int tintColor, int shadeColor, String serialized){
+    this.mainColor = mainColor;
+    this.tintColor = tintColor;
     this.shadeColor = shadeColor;
     this.serialized = serialized;
   }
@@ -141,5 +147,17 @@ public enum MaterialColor {
     public UnknownColorException(String message) {
       super(message);
     }
+  }
+
+  public int getMainColor() {
+    return mainColor;
+  }
+
+  public int getTintColor() {
+    return tintColor;
+  }
+
+  public int getShadeColor() {
+    return shadeColor;
   }
 }

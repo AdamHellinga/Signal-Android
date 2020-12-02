@@ -8,6 +8,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 
+import org.signal.glide.Log;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.util.ThemeUtil;
 
@@ -17,9 +18,9 @@ import java.util.Map;
 import static org.thoughtcrime.securesms.util.ThemeUtil.isDarkTheme;
 
 public class GroupColours {
-    public static int mainStr = 0X6b6b78;
-    public static int tintStr = 0Xbebec6;
-    public static int shadeStr = 0X5a5a63;
+    public static int mainStr = R.color.conversation_crimson;
+    public static int tintStr = R.color.conversation_crimson_tint;
+    public static int shadeStr = R.color.conversation_crimson_shade;
 
     public static int getMainStr() {
         return mainStr;

@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Build;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.WorkerThread;
 
 import com.annimon.stream.Stream;
@@ -21,6 +23,9 @@ import org.signal.storageservice.protos.groups.local.DecryptedGroup;
 import org.signal.storageservice.protos.groups.local.DecryptedMember;
 import org.signal.zkgroup.InvalidInputException;
 import org.signal.zkgroup.groups.GroupMasterKey;
+import org.thoughtcrime.securesms.R;
+import org.thoughtcrime.securesms.color.GroupColours;
+import org.thoughtcrime.securesms.color.MaterialColor;
 import org.thoughtcrime.securesms.database.helpers.SQLCipherOpenHelper;
 import org.thoughtcrime.securesms.groups.GroupAccessControl;
 import org.thoughtcrime.securesms.groups.GroupId;
@@ -44,6 +49,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
+import static android.graphics.BlendMode.COLOR;
+
+@RequiresApi(api = Build.VERSION_CODES.Q)
 public final class GroupDatabase extends Database {
 
   private static final String TAG = Log.tag(GroupDatabase.class);
@@ -88,6 +96,7 @@ public final class GroupDatabase extends Database {
           MMS + " INTEGER DEFAULT 0, " +
           V2_MASTER_KEY + " BLOB, " +
           V2_REVISION + " BLOB, " +
+              COLOR  + " TEXT DEFAULT NULL, " +
           V2_DECRYPTED_GROUP + " BLOB);";
 
   public static final String[] CREATE_INDEXS = {
@@ -406,6 +415,24 @@ public final class GroupDatabase extends Database {
     Recipient.live(groupRecipientId).refresh();
 
     notifyConversationListListeners();
+  }
+
+  public void setColor(@NonNull GroupId id, @NonNull MaterialColor color) {
+    ContentValues values = new ContentValues();
+
+    Log.d("ColourMain",Integer.toString(color.getMainColor()));
+    Log.d("ColourTint",Integer.toString(color.getTintColor()));
+    Log.d("ColourShade",Integer.toString(color.getShadeColor()));
+
+    GroupColours.setMainStr(color.getMainColor());
+    GroupColours.setTintStr(color.getTintColor());
+    GroupColours.setShadeStr(color.getShadeColor());
+
+    values.put(String.valueOf(COLOR), "group");
+
+    //RecipientDatabase thing = DatabaseFactory.getRecipientDatabase(context);
+    //RecipientId newId  = thing.getOrInsertFromGroupId(id);
+    //Recipient.live(newId).refresh();
   }
 
   public void update(@NonNull GroupId.V1 groupId,

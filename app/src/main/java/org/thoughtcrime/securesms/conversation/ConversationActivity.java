@@ -98,6 +98,7 @@ import org.thoughtcrime.securesms.VerifyIdentityActivity;
 import org.thoughtcrime.securesms.attachments.Attachment;
 import org.thoughtcrime.securesms.attachments.TombstoneAttachment;
 import org.thoughtcrime.securesms.audio.AudioRecorder;
+import org.thoughtcrime.securesms.color.GroupColours;
 import org.thoughtcrime.securesms.color.MaterialColor;
 import org.thoughtcrime.securesms.components.AnimatingToggle;
 import org.thoughtcrime.securesms.components.ComposeText;
@@ -2322,6 +2323,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   }
 
   private void setActionBarColor(MaterialColor color) {
+    color.SetColors(GroupColours.getMainStr(), GroupColours.getTintStr(), GroupColours.getShadeStr(), "group_colours");
     ActionBar supportActionBar = getSupportActionBar();
     if (supportActionBar == null) throw new AssertionError();
     supportActionBar.setBackgroundDrawable(new ColorDrawable(color.toActionBarColor(this)));

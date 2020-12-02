@@ -20,6 +20,9 @@ import org.thoughtcrime.securesms.BlockUnblockDialog;
 import org.thoughtcrime.securesms.ContactSelectionListFragment;
 import org.thoughtcrime.securesms.ExpirationDialog;
 import org.thoughtcrime.securesms.R;
+import org.thoughtcrime.securesms.color.MaterialColor;
+import org.thoughtcrime.securesms.color.MaterialColors;
+import org.thoughtcrime.securesms.color.GroupColours;
 import org.thoughtcrime.securesms.contacts.ContactsCursorLoader;
 import org.thoughtcrime.securesms.database.MediaDatabase;
 import org.thoughtcrime.securesms.database.MentionUtil;
@@ -264,7 +267,7 @@ public class ManageGroupViewModel extends ViewModel {
   }
 
   void onSelectColor(int color) {
-
+    manageGroupRepository.setColor(color);
   }
 
   void setMuteUntil(long muteUntil) {

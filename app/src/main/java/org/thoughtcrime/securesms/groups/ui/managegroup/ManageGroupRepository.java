@@ -1,6 +1,7 @@
 package org.thoughtcrime.securesms.groups.ui.managegroup;
 
 import android.content.Context;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
@@ -10,10 +11,14 @@ import com.annimon.stream.Stream;
 
 import org.signal.storageservice.protos.groups.local.DecryptedGroup;
 import org.thoughtcrime.securesms.ContactSelectionListFragment;
+import org.thoughtcrime.securesms.color.GroupColours;
+import org.thoughtcrime.securesms.color.MaterialColor;
+import org.thoughtcrime.securesms.color.MaterialColors;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.GroupDatabase;
 import org.thoughtcrime.securesms.database.RecipientDatabase;
 import org.thoughtcrime.securesms.database.ThreadDatabase;
+import org.thoughtcrime.securesms.dependencies.ApplicationDependencies;
 import org.thoughtcrime.securesms.groups.GroupAccessControl;
 import org.thoughtcrime.securesms.groups.GroupChangeException;
 import org.thoughtcrime.securesms.groups.GroupId;
@@ -23,6 +28,7 @@ import org.thoughtcrime.securesms.groups.MembershipNotSuitableForV2Exception;
 import org.thoughtcrime.securesms.groups.ui.GroupChangeErrorCallback;
 import org.thoughtcrime.securesms.groups.ui.GroupChangeFailureReason;
 import org.thoughtcrime.securesms.groups.SelectionLimits;
+import org.thoughtcrime.securesms.jobs.MultiDeviceContactUpdateJob;
 import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.recipients.RecipientId;
@@ -74,6 +80,17 @@ final class ManageGroupRepository {
         return new GroupCapacityResult(groupRecord.getMembers(), FeatureFlags.groupLimits());
       }
     }, onGroupCapacityLoaded::accept);
+  }
+
+  void setColor(int color) {
+    SignalExecutors.BOUNDED.execute(() -> {
+      MaterialColor selectedColor = MaterialColors.CONVERSATION_PALETTE.getByColor(context, color);
+
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        DatabaseFactory.getGroupDatabase(context).setColor(groupId, selectedColor);
+      }
+      //ApplicationDependencies.getJobManager().add(new MultiDeviceContactUpdateJob(groupId))
+    });
   }
 
   @WorkerThread

@@ -37,6 +37,7 @@ import org.thoughtcrime.securesms.MediaPreviewActivity;
 import org.thoughtcrime.securesms.MuteDialog;
 import org.thoughtcrime.securesms.PushContactSelectionActivity;
 import org.thoughtcrime.securesms.R;
+import org.thoughtcrime.securesms.color.GroupColours;
 import org.thoughtcrime.securesms.color.MaterialColor;
 import org.thoughtcrime.securesms.color.MaterialColors;
 import org.thoughtcrime.securesms.components.AvatarImageView;
@@ -130,7 +131,7 @@ public class ManageGroupFragment extends LoggingFragment {
   private final Recipient.FallbackPhotoProvider fallbackPhotoProvider = new Recipient.FallbackPhotoProvider() {
     @Override
     public @NonNull FallbackContactPhoto getPhotoForGroup() {
-      return new FallbackPhoto80dp(R.drawable.ic_group_80, MaterialColor.ULTRAMARINE);
+      return new FallbackPhoto80dp(R.drawable.ic_group_80, MaterialColor.GROUP);
     }
   };
 
@@ -405,8 +406,6 @@ public class ManageGroupFragment extends LoggingFragment {
           break;
       }
     });
-
-
 
     MaterialColor GroupColor = MaterialColor.GROUP;
     @ColorInt int        color         = GroupColor.toActionBarColor(requireContext());
