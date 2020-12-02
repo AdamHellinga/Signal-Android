@@ -419,7 +419,8 @@ public final class GroupDatabase extends Database {
 
   public void setColor(@NonNull GroupId id, @NonNull MaterialColor color) {
     ContentValues values = new ContentValues();
-
+	
+	// check color settings
     Log.d("ColourMain",Integer.toString(color.getMainColor()));
     Log.d("ColourTint",Integer.toString(color.getTintColor()));
     Log.d("ColourShade",Integer.toString(color.getShadeColor()));
