@@ -160,4 +160,6 @@ public enum MaterialColor {
   public int getShadeColor() {
     return shadeColor;
   }
+
+  public String getSerialized() { return serialized; }
 }
